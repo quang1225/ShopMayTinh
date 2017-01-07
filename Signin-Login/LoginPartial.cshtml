@@ -1,0 +1,50 @@
+﻿
+@{
+    var email = (ShopMayTinh.Models.KHACHHANG)Session["Email"];
+}
+
+@if (Session["Email"] == null || Session["Email"].ToString() == "")
+{
+    <text>
+        <li class="dropdown">
+            <a class="dropdown-toggle menutext" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Tài Khoản<span class="caret"></span></a>
+            <ul id="login-dp" class="dropdown-menu taikhoan">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                                <h4>Đăng nhập bằng:</h4>
+                                <a href="#" class="btn btn-fb"><i class="fa fa-facebook-official fa-lg"></i><b> Facebook</b></a>
+                                <br>
+                                <a href="#" class="btn btn-tw"><i class="fa fa-google-plus-official fa-lg"></i><b> Google</b></a>
+
+                                <br>
+                                <h4>hoặc tài khoản hệ thống:</h4>
+
+                                <a href="@Url.Action("DangnhapDangky","KhachHang")" class="btn btn-success"><b>Đăng nhập/ Đăng ký</b></a>
+
+                        </div>
+                    </div>
+            </ul>
+        </li>
+    </text>
+}
+
+else
+{
+    <text>
+        <li class="dropdown">
+            <a class="dropdown-toggle menutext" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> @email.Email<span class="caret"></span></a>
+            <ul id="login-dp" class="dropdown-menu taikhoan">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+
+                            <a href="@Url.Action("SuaTK","KhachHang")" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span><b>Sửa tài khoản</b></a>
+                            <br>
+                            <a href="@Url.Action("DangXuat","KhachHang")" class="btn btn-primary"><b>ĐĂNG XUẤT</b></a>
+
+                        </div>
+
+                    </div>
+            </ul>
+        </li>
+    </text>
+}
