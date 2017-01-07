@@ -1,0 +1,133 @@
+﻿
+@using PagedList;
+@using PagedList.Mvc;
+
+@using ShopMayTinh.Models
+
+@model PagedList.PagedList<SANPHAM>
+
+@helper Truncate( string input, int length)
+        {
+            if ( input.Length < length)
+            {
+                @input
+            }
+            else
+            {
+                @input.Substring( 0, length)<text>...</text>
+            }
+        }
+
+@{
+    ViewBag.Title = "Quản lý SẢN PHẨM";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h3>QUẢN LÝ SẨN PHẨM</h3>
+
+<br >
+<a href="@Url.Action("ThemSP","Admin")" style="font-weight: bold" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Thêm mới sản phẩm</a>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr style="text-align: center !important; vertical-align: middle">
+                        <th>
+                            Hình SP
+                        </th>
+                        <th>
+                            Tên SP
+                        </th>
+                        <th>
+                            Tên danh mục
+                        </th>
+                        <th>
+                            Hãng SX
+                        </th>
+                        <th>
+                            Tình trạng
+                        </th>
+                        <th>
+                            Đơn giá
+                        </th>
+                        <th>
+                            Ngày nhập hàng
+                        </th>
+                        <th>
+                            Mô tả
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img style="max-height: 120px" class="img-responsive" src="~/img/sanpham/@item.HinhAnh">
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TenSP)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DANHMUC.TenDM)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HangSX)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TinhTrang)
+                            </td>
+                            <td>
+                                @String.Format("{0:0,0}", item.DonGia)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NgayNhap)
+                            </td>
+                            <td>
+                                @Truncate( item.MoTa, 100)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("SuaSP","Admin", new { id = item.MaSP })" class = "btn btn-primary btn-sm">Sửa</a>
+                                <a href="@Url.Action("chitietSP","Home", new { id = item.MaSP })" class = "btn btn-warning btn-sm">Chi tiết</a>
+                                <button type="button" data-toggle="modal" data-target="#@item.MaSP" class="btn btn-danger btn-sm">Xóa</button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="@item.MaSP" role="dialog">
+                                    <div class="modal-dialog modal-sm">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Bạn có chắc chắn muốn xóa sản phẩm này ?</h4>
+                                            </div>
+                                            <div style="color: red" class="modal-body">
+                                                <img style="max-height: 120px" class="img-responsive" src="~/img/sanpham/@item.HinhAnh">
+                                                <br>
+                                                <b>@item.TenSP</b>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="@Url.Action("XoaSP","Admin", new { @id = item.MaSP })" class="btn btn-danger">XÓA</a>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+            </table>
+            </div>
+        </div>
+
+
+            <div class="col-md-12">
+                Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+            </div>
+
+            <div class="col-md-12">
+                @Html.PagedListPager(Model, page => Url.Action("QLsanpham", "Admin", new { trang = page }))
+            </div>
+    </div>
