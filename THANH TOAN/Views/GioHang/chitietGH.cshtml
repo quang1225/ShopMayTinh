@@ -1,0 +1,92 @@
+﻿@using ShopMayTinh.Models
+@{
+    ViewBag.Title = "Chi Tiết Giỏ Hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Hình Ảnh</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th class="text-center">Đơn giá</th>
+                        <th class="text-center">Thành tiền</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var linhkien in Model)
+            {
+                        <tr>
+                            <td style="vertical-align: middle">
+                                <a href="@Url.Action("chitietSP","Home", new { id = linhkien.sMaSP })">
+                                    <img src="~/img/sanpham/@linhkien.sHinhAnh" style="width: 72px; height: 72px;">
+                                </a>
+                            </td>
+                            <td>
+                                <h5><b><a href="@Url.Action("chitietSP","Home", new { id = linhkien.sMaSP })">@linhkien.sTenSP</a></b></h5>
+                            </td>
+
+                            @using (Html.BeginForm("capnhatGH", "GioHang", new { @sMaSP = linhkien.sMaSP }))
+                            {
+                                <td style="text-align: center; vertical-align: middle">
+                                    <input type="number" class="form-control" name="txtSoLuong" value="@linhkien.sSoLuong">
+                                </td>
+                                <td style="vertical-align: middle" class="text-center"><h4><strong>@string.Format("{0:0,0}", linhkien.sDonGia)</strong></h4></td>
+                                <td style="vertical-align: middle" class="text-center"><h4><strong>@string.Format("{0:0,0}", linhkien.sThanhTien)</strong></h4></td>
+                                <td style="text-align: center; vertical-align: middle">
+                                    <button type="submit" class="btn btn-success">
+                                        <span class="glyphicon glyphicon-refresh"></span> Cập nhật
+                                    </button>
+                                    <br><br>
+                                    <a href="@Url.Action("XoaGioHang","GioHang", new { @sMaSP = linhkien.sMaSP, @strURL = Request.Url.ToString() })" type="button" class="btn btn-danger">
+                                        <span class="glyphicon glyphicon-remove"></span> Xóa
+                                    </a>
+                                </td>
+                            }
+
+                        </tr>
+                    }
+
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td><h5>Tổng số lượng sản phẩm:</h5></td>
+                        <td class="text-center"><h4><strong>@ViewBag.Tongsoluong</strong></h4></td>
+                    </tr>
+
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td><h3>Tổng cộng:</h3></td>
+                        <td class="text-right"><h3><strong>@string.Format("{0:0,0}", ViewBag.Tongtien)</strong></h3></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-sm-12 text-right">
+        
+        <a href="@Url.Action("xoahetSP","GioHang")" type="button" class="btn btn-danger">
+            <span class="glyphicon glyphicon-trash"></span> Xóa hết sản phẩm
+        </a>
+
+        <a href="@Url.Action("Index","Home")" type="button" class="btn btn-success">
+            <span class="glyphicon glyphicon-shopping-cart"></span> Tiếp tục mua hàng
+        </a>
+
+        <a href="@Url.Action("DatHang","GioHang")" type="button" class="btn btn-primary">
+            Thanh toán <span class="glyphicon glyphicon-play"></span>
+        </a>
+        </div>
+
+    </div>

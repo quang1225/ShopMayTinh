@@ -1,0 +1,95 @@
+﻿
+@using ShopMayTinh.Models
+@model List<Giohang>
+
+@{
+    ViewBag.Title = "dathang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align: center ; color:red">THÔNG TIN HÀNG HÓA</h2>
+<table align="center" border="1">
+    <tr style="text-align:center;font-weight:bold">
+        <td>Mã sản phẩm</td>
+        <td>Tên sản phẩm</td>
+        <td>Số lượng</td>
+        <td>Đơn giá</td>
+        <td>Tổng cộng</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr style="text-align:center;font-weight:bold">
+            <td> @item.sMaSP</td>
+            <td> @item.sTenSP </td>
+
+            @using (Html.BeginForm("capnhatGH", "GioHang", new { @sMaSP = item.sMaSP }))
+            {
+
+                <td> @item.sSoLuong</td>
+                <td> @String.Format("{0:0,0}", item.sDonGia)</td>
+                <td> @String.Format("{0:0,0}", item.sThanhTien)</td>
+            }
+        </tr>
+    }
+    <tr style="font-weight:bold;text-align:right;">
+        <td colspan="3"> Số Lượng Sản Phẩm: <p style="color:red">@ViewBag.TongSoLuong </p></td>
+        <td colspan="3"> Tổng Tiền : <p style="color:red">@String.Format("{0:0,0}", ViewBag.TongTien) VND </p></td>
+    </tr>
+
+</table>
+
+<br />
+<a href="@Url.Action("chitietGH","GioHang")" class="btn btn-success" style="float: right"><span class="glyphicon glyphicon-shopping-cart"></span><b> Trở về giỏ hàng</b></a>
+<br />
+
+<h2 style="text-align:center;color:red"> THÔNG TIN ĐẶT HÀNG</h2>
+@{
+    KHACHHANG kh = (KHACHHANG)Session["Email"];
+}
+<table align="center">
+    <form action="/GioHang/DatHang" method="post">
+        <tr style="height:40px">
+            <td>
+                Họ tên:
+            </td>
+            <td style="font-weight:bold">  @kh.TenKH</td>
+        </tr>
+        <tr style="height:40px">
+            <td>
+                Địa chỉ:
+            </td>
+            <td style="font-weight:bold">  @kh.Address</td>
+        </tr>
+        <tr style="height:40px">
+            <td>
+                SĐT:
+            </td>
+            <td style="font-weight:bold">  @kh.Phone</td>
+        </tr>
+
+        <tr style="height:40px">
+            <td>
+                Ngày đặt:
+            </td>
+            <td style="font-weight:bold">  @DateTime.Now.ToShortDateString()</td>
+        </tr>
+        <tr style="height:40px">
+            <td>
+                Ngày giao hàng:
+            </td>
+            <td>
+                <input type="date" name="NgayGiao" required />
+            </td>
+        </tr>
+
+        <tr style="height:40px">
+            <td></td>
+            <td>
+                <br>
+                <input style="font-weight: bold" type="Submit" class="btn btn-primary" value="ĐẶT HÀNG THU TIỀN TẠI NHÀ" />
+                
+                <a target="_blank" href="https://www.nganluong.vn/button_payment.php?receiver=quang1225@gmail.com&product_name=@kh.TenKH - @DateTime.Now.ToShortDateString() - @ViewBag.TongTien&price=@ViewBag.TongTien&return_url=http://Quang47D1.com/GioHang/XacNhanDonHang&comments=THANH TOÁN ĐƠN HÀNG TẠI Quang47D1.com"><img src="~/img/safe-pay-3.png" border="0" /></a>
+            </td>
+        </tr>
+    </form>
+</table>
