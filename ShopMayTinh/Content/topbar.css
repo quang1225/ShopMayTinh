@@ -1,0 +1,215 @@
+
+
+.camket{
+  padding-top: 34px;  
+}
+
+.logo{
+    padding-top: 38px;
+    padding-bottom: 21px;
+}
+
+.btn.btn-warning.btn-lg{
+      background-color: #EC971F;
+      padding: 7px;
+      width: 100%;
+      font-size: 21px;
+}
+
+
+.btn.btn-primary{
+      max-width: 100%;
+}
+
+.carousel{
+    margin-left: -20px;
+    margin-right: -15px;
+}
+
+.container{
+      padding-top: 50px;
+}
+
+/* Add a dark background color with a little bit see-through */ 
+
+.menutext{
+    font-weight: bold;
+}
+
+.navbartop {
+    margin-bottom: 0;
+    background-color: #0574BB;
+    border: 0;
+    font-size: 16px !important;
+    letter-spacing: 1px;
+    list-style-type: none;
+    padding-right: 45px;
+
+}
+
+.navbartop ul {
+    list-style-type: none;
+    margin: 0;
+    padding-top: 14px;
+    padding-bottom: 17px;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.navbartop li {
+    float: left;
+}
+
+.navbartop li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbartop li a:hover:not(.active) {
+    background-color: #111;
+    color: white;
+}
+
+.navbartop .active {
+    background-color: #4CAF50;
+}
+
+
+
+/*MENU GIO HANG*/
+
+ul.dropdown-cart{
+    min-width:250px;
+}
+ul.dropdown-cart li .item{
+    display:block;
+    padding:3px 10px;
+    margin: 3px 0;
+}
+ul.dropdown-cart li .item:hover{
+    background-color:#f3f3f3;
+}
+ul.dropdown-cart li .item:after{
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+ul.dropdown-cart li .item-left{
+    float:left;
+}
+ul.dropdown-cart li .item-left img,
+ul.dropdown-cart li .item-left span.item-info{
+    float:left;
+}
+ul.dropdown-cart li .item-left span.item-info{
+    margin-left:10px;   
+}
+ul.dropdown-cart li .item-left span.item-info span{
+    display:block;
+}
+ul.dropdown-cart li .item-right{
+    float:right;
+}
+ul.dropdown-cart li .item-right button{
+    margin-top:14px;
+}
+
+
+#cart-badge {
+    font-size: 14px;
+    background: #e64c4c;
+    color: #fff;
+    padding: 1px 5px;
+    vertical-align: top;
+}
+
+.giohang {
+  left: 50%;
+  right: auto;
+  text-align: center;
+  transform: translate(-71%, 0);
+  min-width: 229px;
+  color: black !important;
+  background-color: #F9F9F9 !important;
+}
+
+.dropdown-menu.dropdown-cart.giohang li{
+    width: 100%;
+}
+
+
+/*TAI KHOAN*/
+
+.taikhoan {
+  left: 50%;
+  right: auto;
+  text-align: center;
+  transform: translate(-65%, 0);
+  min-width: 229px;
+  color: white;
+}
+
+.btn-fb{
+    color: #fff;
+    background-color: #3b5998;
+}
+.btn-fb:hover{
+    color: #fff;
+    background-color: #7e91bb !important;
+}
+.btn-tw{
+    color: #fff;
+    background-color: #f13232;
+}
+.btn-tw:hover{
+    color: #fff;
+    background-color: #e28383 !important;
+}
+
+
+/*MOBILE*/
+
+@media (max-width:850px) {
+  .navbartop .menutext {
+        font-size: 0px !important;
+        letter-spacing: 0.3px;
+}
+
+.navbartop a span {
+  font-size: 20px !important;
+}
+
+.navbartop {
+  padding-left: 0px;
+  padding-right: 0px;
+
+}
+
+.taikhoan {
+  transform: translate(-86%, 0);
+}
+
+
+}
+
+
+@media (max-width:1200px) {
+
+.wrap-logo-camket{
+    text-align: center;
+}
+
+.camket{
+  padding-top: 0px;
+  padding-bottom: 13px;
+}
+
+
+}

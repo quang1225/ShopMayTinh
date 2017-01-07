@@ -1,0 +1,270 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - SHOP MÁY TÍNH</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+
+
+    <link href="~/Content/menu.css" rel="stylesheet" />
+    <link href="~/Content/topbar.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/hotro.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-3.1.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script src="~/Scripts/menu.js"></script>
+
+    <!--Ajax Process-->
+    <script>
+
+    function AddToCart( MaSP ) {
+        $.ajax({
+            type: 'POST',
+            url: '/GioHang/ThemGioHang',
+            data: { sMaSP: MaSP },
+            success: function (data) {
+                $("#cart-badge").html(data.TongSoLuong);
+            }
+        });
+    }
+    </script>
+    <!--End Ajax Process-->
+
+
+    <!-- CHAT FACEBOOK -->
+    <script type="text/javascript">
+function hide_float_right() {
+    var content = document.getElementById('float_content_right');
+    var hide = document.getElementById('hide_float_right');
+    if (content.style.display == "none")
+    {content.style.display = "block"; hide.innerHTML = '<a href="javascript:hide_float_right()">[X]</a>'; }
+    else { content.style.display = "none"; hide.innerHTML = '<div id="maxo_container"><div id="maxo_iframe_container"><div id="maxo_minimize" onclick="return td_inst.showWidget()"> <div style="display: block;" class="col-md-12 status-icon"><a href="javascript:hide_float_right()"><b><span class="glyphicon glyphicon-question-sign"></span>  HỖ TRỢ TRỰC TUYẾN</b></a></div></div></div>'; }
+}
+(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.5";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <div id="fb-root"></div>
+    <script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.8&appId=1801000533476613";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+</head>
+<body>
+
+    <div class="float-ck" style="right: 0px">
+        <div id="hide_float_right">
+            <a href="javascript:hide_float_right()">[X]</a>
+        </div>
+        <div id="float_content_right">
+            <div id="fb-root"></div>
+            <div class="fb-page" data-tabs="messages"
+                 data-href="https://www.facebook.com/47pro/" data-width="300" data-height="300"
+                 data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false">
+            </div>
+        </div>
+    </div>
+
+            <ul class="navbar navbartop navbar-fixed-top">
+
+                <li><a class="menutext" href="@Url.Action("Index","Home")"><span class="glyphicon glyphicon-home"></span> Trang Chủ </a></li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle menutext" data-toggle="dropdown" href="#">
+                        <span class="glyphicon glyphicon-earphone"></span> GỌI Hotline<span class="caret"></span>
+                    </a>
+                    <ul style="font-weight: bold" class="dropdown-menu">
+                        <li><a href="tel:1111">123 XVNT - 1111</a></li>
+                        <li><a href="tel:2222">493 Giải Phóng - 2222</a></li>
+                        <li><a href="tel:3333">Hà Nội - 3333</a></li>
+                    </ul>
+                </li>
+
+                <li><a class="menutext" href="@Url.Action("About","Home")"><span class="glyphicon glyphicon-map-marker"></span> Bản Đồ </a></li>
+
+                <div style="float: right">
+
+                    <li>
+                        <a class="menutext" href="@Url.Action("chitietGH","GioHang")">
+                            <span class="glyphicon glyphicon-shopping-cart"></span><lavel id="cart-badge" class="badge badge-warning">@Html.Action("GiohangPartial", "GioHang")</lavel><b> Giỏ Hàng</b>
+                        </a>
+                    </li>
+
+
+                    @Html.Action("LoginPartial", "KhachHang")
+
+
+                </div>
+
+            </ul>
+
+            <div class="container">
+
+
+                <div class="row">
+                    <div class="wrap-logo-camket">
+                        <div class="col-lg-4">
+                            <div class="logo"><a href="/"><img src="~/img/logo.png" alt=""></a></div>
+                        </div>
+                        <div class="camket">
+                            <div class="col-lg-4">
+                                <h4><img src="~/img/cart.png" alt=""> THANH TOÁN KHI GIAO HÀNG</h4>
+                            </div>
+                            <div class="col-lg-4">
+                                <h4><img src="~/img/airplane.png" alt="">  MIỄN PHÍ VẬN CHUYỂN TP.HCM</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+
+                    <!-- uncomment code for absolute positioning tweek see top comment in css -->
+                    <!-- <div class="absolute-wrapper"> </div> -->
+                    <!-- Menu -->
+                    <div class="side-menu">
+
+                        <nav class="navbar navbar-default" role="navigation">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                            <div class="navbar-header">
+                                <div class="brand-wrapper">
+                                    <!-- Hamburger -->
+                                    <button type="button" class="navbar-toggle">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+
+                                    <!-- Brand -->
+                                    <div class="brand-name-wrapper">
+                                        <a class="navbar-brand" href="#">
+                                            DANH MỤC SẢN PHẨM
+                                        </a>
+                                    </div>
+
+                                    <!-- Search -->
+                                    <a data-toggle="collapse" href="#search" class="btn btn-default" id="search-trigger">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </a>
+
+                                    <!-- Search body -->
+
+                                    <div id="search" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <form action="/Home/TimKiem" method="post" class="navbar-form" role="search">
+                                                <div class="form-group">
+                                                    <input type="text" name="timkiem" class="form-control" placeholder="Tìm sản phẩm...">
+                                                </div>
+                                                <button type="submit" class="btn btn-default "><span class="glyphicon glyphicon-ok"></span></button>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <!-- Main Menu -->
+                            <div class="side-menu-container">
+                                <ul class="nav navbar-nav">
+
+                                    <!-- Dropdown-->
+                                    <li class="panel panel-default" id="dropdown">
+                                        <a data-toggle="collapse" href="#LKmoi">
+                                            Linh Kiện MỚI <span class="caret"></span>
+                                        </a>
+
+                                        <!-- Dropdown level 1 -->
+                                        <div id="LKmoi" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <ul class="nav navbar-nav">
+
+                                                    <li><a href="@Url.Action("DSlinhkienmoi","Home",new { id = 0 })">TẤT CẢ LINH KIỆN MỚI</a></li>
+
+                                                    @Html.Action("linhkienmoi", "Home")
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="panel panel-default" id="dropdown">
+                                        <a data-toggle="collapse" href="#LKcu">
+                                            Linh Kiện CŨ <span class="caret"></span>
+                                        </a>
+
+                                        <!-- Dropdown level 1 -->
+                                        <div id="LKcu" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <ul class="nav navbar-nav">
+
+                                                    <li><a href="@Url.Action("DSlinhkiencu","Home",new { id = 0 })">TẤT CẢ LINH KIỆN CŨ</a></li>
+
+                                                    @Html.Action("linhkiencu", "Home")
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li><a href="@Url.Action("TinTuc","Home")"><span class="glyphicon glyphicon-list-alt"></span> Tin Tức</a></li>
+
+                                    <li><a href="@Url.Action("About","Home")"><span class="glyphicon glyphicon-info-sign"></span> Thông Tin Shop</a></li>
+
+                                </ul>
+                            </div><!-- /.navbar-collapse -->
+                        </nav>
+
+                    </div>
+
+                    <!-- Main Content -->
+                    <div class="container-fluid">
+                        <div class="side-body">
+
+
+                            @RenderBody()
+
+                            <br /><br />
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <footer style="background-color: #0574BB" class="footer">
+                <br>
+                <h4 style="color: white; font-weight: bold; text-align: center;"><i>Flat Template designed by  </i><span class="glyphicon glyphicon-copyright-mark"></span> Lê Hồng Quang</h4>
+                <br>
+            </footer>
+
+            <!-- @Html.Partial("_LoginPartial") -->
+
+
+            
+
+</body>
+
+</html>
+
+<noembed>  <!-- CHO KHOI HIEN QUANG CAO HOSTING -->
