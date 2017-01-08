@@ -1,0 +1,99 @@
+﻿
+@using PagedList;
+@using PagedList.Mvc;
+
+@using ShopMayTinh.Models
+
+@model PagedList.PagedList<CHITIETDONHANG>
+
+@{
+    ViewBag.Title = "Chi Tiết ĐƠN ĐẶT HÀNG";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h3>CHI TIẾT ĐƠN ĐẶT HÀNG</h3>
+<br>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            Hình SP
+                        </th>
+                        <th>
+                            Tên SP
+                        </th>
+                        <th>
+                            Số Lượng
+                        </th>
+                        <th>
+                            Đơn giá
+                        </th>
+                        <th>
+                            Tổng cộng
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img style="max-height: 60px" class="img-responsive" src="~/img/sanpham/@item.SANPHAM.HinhAnh">
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SANPHAM.TenSP)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Soluong)
+                            </td>
+                            <td>
+                                @String.Format("{0:0,0}", item.DonGia)
+                            </td>
+                            <td>
+                                @String.Format("{0:0,0}", item.TongCong)
+                            </td>
+                            <td>
+                                <button type="button" data-toggle="modal" data-target="#@item.MaSP" class="btn btn-danger btn-sm">Xóa</button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="@item.MaSP" role="dialog">
+                                    <div class="modal-dialog modal-sm">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Bạn có chắc chắn muốn xóa sản phẩm này ?</h4>
+                                            </div>
+                                            <div style="color: red" class="modal-body">
+                                                <img style="max-height: 120px" class="img-responsive" src="~/img/sanpham/@item.SANPHAM.HinhAnh">
+                                                <br>
+                                                <b>@item.SANPHAM.TenSP</b>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="@Url.Action("XoaCTDH", "Admin", new { @id = item.MaSP, @dh = item.MaDH, @URL = Request.Url.ToString() })" class="btn btn-danger">XÓA</a>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+            </table>
+        </div>
+    </div>
+
+
+    <div class="col-md-12">
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+    </div>
+
+    <div class="col-md-12">
+        @Html.PagedListPager(Model, page => Url.Action("chitietDH", "Admin", new { trang = page }))
+    </div>
+</div>
+

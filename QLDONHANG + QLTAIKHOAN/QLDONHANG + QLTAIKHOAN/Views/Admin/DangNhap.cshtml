@@ -1,0 +1,51 @@
+﻿
+@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bảo Mật Admin</title>
+
+    <link href="~/Content/dangnhapAdmin.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+
+    <h1>KHU VỰC QUẢN TRỊ ADMIN</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <!-- Login Container -->
+    <section class="login">
+        <form>
+            <!-- The Username Field -->
+            <label for="taikhoan">
+                Tài khoản quản trị
+                <input type="text" name="userAdmin" id="taikhoan" required />
+            </label>
+
+            <!-- The Password Field -->
+            <label for="matkhau">
+                Mật khẩu
+                <input type="password" name="passAdmin" id="matkhau" required />
+            </label>
+
+
+            <!-- The Login Button -->
+            <input type="submit" value="ĐĂNG NHẬP" />
+            <br />
+            
+        </form>
+    </section>
+}
+
+    <h2 style="text-align: center; color: red">@ViewBag.ThongbaoAdmin</h2>
+
+</body>
+</html>
